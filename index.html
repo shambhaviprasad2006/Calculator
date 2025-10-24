@@ -1,184 +1,210 @@
-<html> 
-   <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      <script>
-          var temp=0;
-          $(document).ready(function()
-                            {   
-             
-                $(".bdy").keydown(function(event)
-                                  { 
-                    var x = event.which, stg = String.fromCharCode(x);
-                    if(x==48||x==96)
-                    $("#bt0").addClass("bt");
-                    if(x==49||x==97)
-                    $("#bt1").addClass("bt");
-                    if(x==50||x==98)
-                    $("#bt2").addClass("bt");
-                    if(x==51||x==99)
-                    $("#bt3").addClass("bt");
-                    if(x==52||x==100)
-                    $("#bt4").addClass("bt");
-                    if(x==53||x==101)
-                    $("#bt5").addClass("bt");
-                    if(x==54||x==102)
-                    $("#bt6").addClass("bt");
-                    if(x==55||x==103)
-                    $("#bt7").addClass("bt");
-                    if(x==56||x==104)
-                    $("#bt8").addClass("bt");
-                    if(x==57||x==105)
-                    $("#bt9").addClass("bt");
-                    if(x==110||x==190)
-                    $("#btdot").addClass("bt");
-                    if(x==13)
-                    $("#bteq").addClass("bt");
-                    if(x==8)
-                    $("#btbs").addClass("btx");
-                    if(x==67)
-                    $("#btclr").addClass("btx");
-                    if(x==106)
-                    $("#btmtp").addClass("btx");
-                    if(x==107)
-                    $("#btadd").addClass("btx");
-                    if(x==109)
-                    $("#btsub").addClass("btx");
-                    if(x==111)
-                    $("#btdiv").addClass("btx");
-                        });
-                $(".bdy").keyup(function()
-                                {
-                    $("#bt0").removeClass("bt");
-                    $("#bt1").removeClass("bt");
-                    $("#bt2").removeClass("bt");
-                    $("#bt3").removeClass("bt");
-                    $("#bt4").removeClass("bt");
-                    $("#bt5").removeClass("bt");
-                    $("#bt6").removeClass("bt");
-                    $("#bt7").removeClass("bt");
-                    $("#bt8").removeClass("bt");
-                    $("#bt9").removeClass("bt");
-                    $("#btdot").removeClass("bt");
-                    $("#bteq").removeClass("bt");
-                    $("#btbs").removeClass("btx");
-                    $("#btclr").removeClass("btx");
-                    $("#btmtp").removeClass("btx");
-                    $("#btadd").removeClass("btx");
-                    $("#btsub").removeClass("btx");
-                    $("#btdiv").removeClass("btx");
-                                });
-                            });
-         function getin(val) 
-         { 
-             document.getElementById("rslt").value+=val 
-         }  
-         function calc() 
-         { 
-             var x = document.getElementById("rslt").value
-             var y = eval(x) 
-             document.getElementById("rslt").value = y 
-         } 
-         function clrall() 
-         { 
-             document.getElementById("rslt").value = "" 
-         }
-         function backspace()
-         {
-            var dlt  = document.getElementById('rslt').value;
-               document.getElementById('rslt').value=dlt.substring(0,dlt.length -1);
-         }
-          function key1(event)
-         {
-              var x = event.which, stg = String.fromCharCode(x);
-             if(x == 67)
-             {
-              clrall();
-             }
-             else if(x == 8)
-             {
-              backspace(); 
-             }
-         }
-        function key(event) {
-              var x = event.which, stg = String.fromCharCode(x);
-              if(x==13){
-                  calc();  
-              }
-            console.log("x="+x+" temp="+temp)
-              if(x >39 && x<61 && x!=44 && x!=59 && x!=58 && x!=60 && x!=46){
-                  getin(stg);
-                if(x==41 || x==40 || x==47 || x==42 || x==45 || x==43 || x==13)
-                {
-                temp=0;
-                }
-              }
-              if(x==46 && temp==0){
-                    getin(stg);
-                    temp++;
-              }
-              else
-                  document.getElementById("rslt").value += "";
-         }
-      </script>
-<style>
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  min-width: 44%;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Totalizer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    :root{
+      --btn-size: 3.6rem;
+      --display-height: 3.2rem;
+      --accent: #17a2b8;
+      --accent-dark: #138496;
     }
-    td{
-        font-size: 40px !important;
+    body { background: linear-gradient(135deg,#f8f9fa 0%, #e9f7fb 100%); }
+    .calculator-card{
+      max-width: 420px;
+      margin: 3rem auto;
+      box-shadow: 0 6px 20px rgba(23,162,184,0.14);
+      border-radius: 12px;
+      overflow: hidden;
     }
-.bt{
-    background-color: #17a2b8;
-    color: white; 
-   }
-    
-.btx{
-    background-color: #138496;
-   }
-</style>
-       
-   </head> 
-   <body class="bdy container-fluid bg-light " onkeypress="key(event)" onkeyup="key1(event)"> 
-      <div class="text-center display-1">Totalizer</div> 
-       <br>
-      <table class="text-center" align="center"> 
-         <tr> 
-            <td colspan="3"><input class="btn btn-primary btn-block" type="text" id="rslt" disabled></td> 
-            <td colspan="2"><button id="btclr" class="btn btn-info btn-block" type="button" onclick="clrall()">Clear</button> </td> 
-         </tr> 
-         <tr> 
-            <td><button id="bt1" class="btn btn-outline-info btn-block" type="button" onclick="getin('1')">1</button> </td> 
-            <td><button id="bt2" class="btn btn-outline-info btn-block" type="button" onclick="getin('2')">2</button> </td> 
-            <td><button id="bt3" class="btn btn-outline-info btn-block" type="button" onclick="getin('3')">3</button> </td> 
-            <td><button id="btdiv" class="btn btn-info btn-block" type="button" onclick="getin('/')">/</button> </td>
-            <td colspan="2"><button id="btbs" class="btn btn-info btn-block" type="button" onclick="backspace()">Bkspc</button> </td> 
-         </tr> 
-         <tr> 
-            <td><button id="bt4" class="btn btn-outline-info btn-block" type="button" onclick="getin('4')">4</button> </td> 
-            <td><button id="bt5" class="btn btn-outline-info btn-block" type="button" onclick="getin('5')">5</button> </td> 
-            <td><button id="bt6" class="btn btn-outline-info btn-block" type="button" onclick="getin('6')">6</button> </td> 
-            <td><button id="btsub" class="btn btn-info btn-block" type="button" onclick="getin('-')">-</button> </td>
-            <td><button id="btp1" class="btn btn-info btn-block" type="button" onclick="getin('&#40;')">	&#40;</button> </td>
+    .calc-header{
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: .6px;
+    }
+    .display-wrap { padding: 1rem; background: #fff; }
+    #rslt {
+      height: var(--display-height);
+      font-size: 1.6rem;
+      text-align: right;
+      padding-right: 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #dee2e6;
+      box-shadow: inset 0 -2px 6px rgba(0,0,0,0.02);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 6px; }
+    .btn-calc {
+      height: var(--btn-size);
+      font-size: 1.25rem;
+      border-radius: 8px;
+      transition: transform .06s ease, box-shadow .06s ease;
+    }
+    .btn-calc:active { transform: translateY(1px); }
+    .btn-num { background: #fff; border: 1px solid #ced4da; color: #495057; }
+    .btn-op { background: var(--accent); color: #fff; }
+    .btn-op.alt { background: var(--accent-dark); }
+    .btn-aux { background: #f7f7f7; border: 1px solid #e9ecef; }
+    .highlight {
+      box-shadow: 0 6px 18px rgba(23,162,184,0.18) !important;
+    }
+    .small-muted { font-size: .85rem; color: #6c757d; }
+    @media (max-width: 420px){
+      :root { --btn-size: 3.2rem; }
+      .calculator-card { margin: 1rem; }
+    }
+  </style>
+  <script>
+    // small portable calculator script
+    (function(){
+      var decimalAllowed = true;
 
-         </tr> 
-         <tr> 
-            <td><button id="bt7" class="btn btn-outline-info btn-block" type="button" onclick="getin('7')">7</button> </td> 
-            <td><button id="bt8" class="btn btn-outline-info btn-block" type="button" onclick="getin('8')">8</button> </td> 
-            <td><button id="bt9" class="btn btn-outline-info btn-block" type="button" onclick="getin('9')">9</button> </td> 
-            <td><button id="btadd" class="btn btn-info btn-block" type="button" onclick="getin('+')">+</button> </td>
-            <td><button id="btp2" class="btn btn-info btn-block" type="button" onclick="getin('&#41;')">	&#41;</button> </td>
-         </tr> 
-         <tr> 
-            <td><button id="btdot" class="btn btn-outline-info btn-block" type="button" onclick="getin('.')">.</button> </td> 
-            <td><button id="bt0" class="btn btn-outline-info btn-block" type="button" onclick="getin('0')">0</button> </td> 
-            <td><button id="bteq" class="btn btn-outline-info btn-block" type="button" value="=" onclick="calc()">=</button> </td> 
-            <td><button id="btmtp" class="btn btn-info btn-block" type="button" value="*" onclick="getin('*')">*</button> </td> 
-         </tr> 
-      </table> 
-   </body> 
-</html>  
+      function getin(val){
+        var el = document.getElementById("rslt");
+        el.value += val;
+      }
+
+      function calc(){
+        var el = document.getElementById("rslt");
+        try{
+          // simple evaluation for demo purposes
+          var result = Function('"use strict";return (' + el.value + ')')();
+          el.value = String(result);
+          decimalAllowed = !(/\.\d+$/.test(el.value));
+        }catch(e){
+          el.value = "Error";
+          setTimeout(function(){ el.value = ""; }, 900);
+        }
+      }
+
+      function clrall(){
+        document.getElementById("rslt").value = "";
+        decimalAllowed = true;
+      }
+
+      function backspace(){
+        var d = document.getElementById('rslt');
+        d.value = d.value.substring(0, d.value.length - 1);
+        // recalc decimal allowance based on last number token
+        var last = (d.value.match(/(\d+\.\d*|\d+)$/)||[""])[0];
+        decimalAllowed = last.indexOf('.') === -1;
+      }
+
+      function tryAddDecimal(){
+        if(decimalAllowed){
+          getin('.');
+          decimalAllowed = false;
+        }
+      }
+
+      // map keys to button ids (for highlighting)
+      var keyToId = {
+        "0":"bt0","1":"bt1","2":"bt2","3":"bt3","4":"bt4","5":"bt5","6":"bt6","7":"bt7","8":"bt8","9":"bt9",
+        ".":"btdot","Enter":"bteq","=":"bteq","Backspace":"btbs","c":"btclr","C":"btclr",
+        "/":"btdiv","*":"btmtp","-":"btsub","+":"btadd","(":"btp1",")":"btp2"
+      };
+
+      function highlight(id){
+        if(!id) return;
+        var el = document.getElementById(id);
+        if(!el) return;
+        el.classList.add((el.classList.contains('btn-op')? 'highlight' : 'highlight'));
+      }
+      function unhighlightAll(){
+        var all = document.querySelectorAll('.btn-calc');
+        all.forEach(function(b){ b.classList.remove('highlight'); });
+      }
+
+      // keyboard handlers attached to document for reliability
+      document.addEventListener('keydown', function(e){
+        var k = e.key;
+        // prevent default when operating on keys that would type into page
+        if(/^[0-9]$/.test(k) || k === '.' || k === '/' || k === '*' || k === '-' || k === '+' || k === '(' || k === ')' || k === 'Enter' || k === 'Backspace' || k === 'c' || k === 'C'){
+          e.preventDefault();
+        }
+        unhighlightAll();
+        highlight(keyToId[k]);
+        if(/^[0-9]$/.test(k)){
+          getin(k);
+          return;
+        }
+        if(k === '.' ){ tryAddDecimal(); return; }
+        if(k === 'Enter' || k === '='){ calc(); return; }
+        if(k === 'Backspace'){ backspace(); return; }
+        if(k === 'c' || k === 'C'){ clrall(); return; }
+        if(k === '/' || k === '*' || k === '-' || k === '+' || k === '(' || k === ')'){
+          getin(k);
+          decimalAllowed = true; // allow decimal in new number
+          return;
+        }
+      });
+
+      document.addEventListener('keyup', function(){ unhighlightAll(); });
+
+      // expose to global for button onclicks
+      window.getin = getin;
+      window.calc = calc;
+      window.clrall = clrall;
+      window.backspace = backspace;
+    })();
+  </script>
+</head>
+<body>
+  <div class="calculator-card">
+    <div class="calc-header">
+      Totalizer
+      <div class="small-muted">Simple responsive calculator</div>
+    </div>
+
+    <div class="display-wrap">
+      <input id="rslt" class="form-control" type="text" readonly placeholder="0" />
+    </div>
+
+    <div class="p-3" style="background:#f8f9fa;">
+      <table>
+        <tr>
+          <td colspan="3"><button id="btclr" class="btn btn-aux btn-block btn-calc" type="button" onclick="clrall()">Clear</button></td>
+          <td colspan="2"><button id="btbs" class="btn btn-aux btn-block btn-calc" type="button" onclick="backspace()">Bkspc</button></td>
+        </tr>
+        <tr>
+          <td><button id="bt7" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('7')">7</button></td>
+          <td><button id="bt8" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('8')">8</button></td>
+          <td><button id="bt9" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('9')">9</button></td>
+          <td><button id="btdiv" class="btn btn-op btn-block btn-calc" type="button" onclick="getin('/')">/</button></td>
+          <td><button id="btp1" class="btn btn-aux btn-block btn-calc" type="button" onclick="getin('(')">(</button></td>
+        </tr>
+        <tr>
+          <td><button id="bt4" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('4')">4</button></td>
+          <td><button id="bt5" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('5')">5</button></td>
+          <td><button id="bt6" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('6')">6</button></td>
+          <td><button id="btsub" class="btn btn-op alt btn-block btn-calc" type="button" onclick="getin('-')">-</button></td>
+          <td><button id="btp2" class="btn btn-aux btn-block btn-calc" type="button" onclick="getin(')')">)</button></td>
+        </tr>
+        <tr>
+          <td><button id="bt1" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('1')">1</button></td>
+          <td><button id="bt2" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('2')">2</button></td>
+          <td><button id="bt3" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('3')">3</button></td>
+          <td><button id="btadd" class="btn btn-op btn-block btn-calc" type="button" onclick="getin('+')">+</button></td>
+          <td rowspan="2"><button id="bteq" class="btn btn-op btn-block btn-calc" style="height: calc(var(--btn-size)*2 + 12px)" type="button" onclick="calc()">=</button></td>
+        </tr>
+        <tr>
+          <td><button id="btdot" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('.')">.</button></td>
+          <td><button id="bt0" class="btn btn-num btn-block btn-calc" type="button" onclick="getin('0')">0</button></td>
+          <td><button id="btmtp" class="btn btn-op alt btn-block btn-calc" type="button" onclick="getin('*')">*</button></td>
+          <td><span class="small-muted text-center d-block" style="line-height: var(--btn-size);">Use keyboard: numbers, + - * / ( ) . Enter Clear</span></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
